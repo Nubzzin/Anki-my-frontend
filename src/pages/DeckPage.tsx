@@ -6,7 +6,22 @@ function DeckPage() {
   const deck = decks.find((deck) => deck.id === id);
 
   if (!deck) {
-    return <div>Deck not found</div>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white px-6">
+        <div className="bg-gray-800 rounded-lg shadow-lg p-10 max-w-md text-center">
+          <h1 className="text-4xl font-bold mb-4">Oops!</h1>
+          <p className="mb-6 text-gray-300">
+            We couldn’t find the deck you’re looking for.
+          </p>
+          <Link
+            to="/"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            Go to Dashboard
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -42,6 +57,7 @@ function DeckPage() {
         <div className="col-span-full flex flex-wrap gap-4 mt-6">
           <Link
             to={`/deck/${deck.id}/study`}
+            state={{ deck }}
             className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition"
           >
             Start Studying
