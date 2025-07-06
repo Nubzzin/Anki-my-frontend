@@ -14,12 +14,12 @@ export class Deck {
 
 export class Card {
   id: string;
-  question: string;
-  answer: string;
+  front: string;
+  back: string;
 
-  constructor(id: string, question: string, answer: string) {
+  constructor(id: string, front: string, back: string) {
     this.id = id;
-    this.question = question;
-    this.answer = answer;
+    this.front = front;
+    this.back = back;
   }
 }

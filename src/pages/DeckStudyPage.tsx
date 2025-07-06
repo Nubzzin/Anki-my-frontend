@@ -66,7 +66,7 @@ function DeckStudyPage() {
         className="w-full max-w-3xl bg-gray-800 rounded-xl shadow p-8 mb-10 text-center text-xl font-medium cursor-pointer transition duration-300 hover:brightness-110"
         onClick={() => setFlipped(true)}
       >
-        <p>{flipped ? currentCard.answer : currentCard.question}</p>
+        <p>{flipped ? currentCard.front : currentCard.back}</p>
         <p className="text-sm text-gray-400 mt-2">
           {!flipped && " (click to flip)"}
         </p>

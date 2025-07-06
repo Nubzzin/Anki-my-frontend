@@ -1,7 +1,19 @@
-import { decks } from "../services/api";
+import fetchDecks from "../services/api";
 import DeckComponent from "../components/DeckComponent";
+import { useEffect, useState } from "react";
+import type { Deck } from "../utils/models";
 
 function DashboardPage() {
+  const [decks, setDecks] = useState<Deck[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const decks = await fetchDecks();
+      setDecks(decks);
+    };
+    fetchData();
+  }, []);
+
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-10">

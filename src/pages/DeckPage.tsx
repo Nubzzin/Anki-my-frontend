@@ -1,9 +1,20 @@
 import { useParams, Link } from "react-router-dom";
-import { decks } from "../services/api";
+import { useEffect, useState } from "react";
+import type { Deck } from "../utils/models";
+import fetchDecks from "../services/api";
 
 function DeckPage() {
   const { id } = useParams();
-  const deck = decks.find((deck) => deck.id === id);
+  const [deck, setDeck] = useState<Deck | null>(null);
+
+  useEffect(() => {
+    const getDeck = async () => {
+      const decks = await fetchDecks();
+      const foundDeck = decks.find((deck: Deck) => deck.id === id);
+      setDeck(foundDeck || null);
+    };
+    getDeck();
+  }, [id]);
 
   if (!deck) {
     return (
