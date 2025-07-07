@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function SidebarComponent() {
+  const [current, setCurrent] = useState(1);
   return (
     <>
       <div className="hidden md:flex flex-col w-64 bg-gray-800">
@@ -11,7 +13,10 @@ function SidebarComponent() {
           <nav className="flex-1 px-2 py-4 bg-gray-800">
             <Link
               to="/"
-              className="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700"
+              className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 active:bg-gray-600 ${
+                current === 1 ? "bg-gray-700" : ""
+              }`}
+              onClick={() => setCurrent(1)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -21,9 +26,9 @@ function SidebarComponent() {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
@@ -31,7 +36,10 @@ function SidebarComponent() {
             </Link>
             <Link
               to="/deck/new"
-              className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
+              className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 active:bg-gray-600 ${
+                current === 2 ? "bg-gray-700" : ""
+              }`}
+              onClick={() => setCurrent(2)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -41,9 +49,9 @@ function SidebarComponent() {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M6 18L18 6M6 6l12 12"
                 />
               </svg>
@@ -51,7 +59,10 @@ function SidebarComponent() {
             </Link>
             <Link
               to="/deck/shared"
-              className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
+              className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 active:bg-gray-600 ${
+                current === 3 ? "bg-gray-700" : ""
+              }`}
+              onClick={() => setCurrent(3)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -61,9 +72,9 @@ function SidebarComponent() {
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M13 10V3L4 14h7v7l9-11h-7z"
                 />
               </svg>

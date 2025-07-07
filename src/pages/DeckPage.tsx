@@ -30,7 +30,7 @@ function DeckPage() {
         {/* Header */}
         <div className="col-span-full mb-4">
           <h1 className="text-2xl font-bold text-white">
-            Welcome to <span className="text-blue-300">{deck.name}</span>!
+            Welcome to <span className="text-slate-300">{deck.name}</span>!
           </h1>
           <p className="text-white mt-1">
             Here's your study progress for today.
