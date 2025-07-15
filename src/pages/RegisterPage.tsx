@@ -10,7 +10,6 @@ function RegisterPage() {
   });
   const [submit, setSubmit] = useState(0);
   const [usernameError, setUsernameError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
