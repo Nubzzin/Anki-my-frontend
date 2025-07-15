@@ -9,11 +9,19 @@ import DashboardPage from "./pages/DashboardPage";
 import DeckStudyPage from "./pages/DeckStudyPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ProtectedRoute from "./components/ProtectedRouteComponent";
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<OutletPage />}>
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <OutletPage />
+          </ProtectedRoute>
+        }
+      >
         <Route index element={<DashboardPage />} />
         <Route path="deck/new" element={<NewDeckPage />} />
         <Route path="deck/:id" element={<DeckPage />} />

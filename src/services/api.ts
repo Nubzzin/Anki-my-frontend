@@ -22,6 +22,25 @@ export async function loginUser(
   return await response.json();
 }
 
+export async function registerUser(
+  username: string,
+  password: string,
+): Promise<any> {
+  const response = await fetch(`${apiUrl}/register`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to register");
+  }
+
+  return await response.json();
+}
+
 export async function fetchDecks(): Promise<Deck[]> {
   const response = await fetch(`${apiUrl}/deck`);
   console.log(response);
