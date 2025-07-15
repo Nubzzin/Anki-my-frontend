@@ -1,4 +1,4 @@
-import fetchDecks from "../services/api";
+import { fetchDecks } from "../services/api";
 import DeckComponent from "../components/DeckComponent";
 import { useEffect, useState } from "react";
 import type { Deck } from "../utils/models";

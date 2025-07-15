@@ -7,6 +7,8 @@ import DeckPage from "./pages/DeckPage";
 import SharedPage from "./pages/SharedPage";
 import DashboardPage from "./pages/DashboardPage";
 import DeckStudyPage from "./pages/DeckStudyPage";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
@@ -18,6 +20,8 @@ function App() {
         <Route path="deck/:id/study" element={<DeckStudyPage />} />
         <Route path="deck/shared" element={<SharedPage />} />
       </Route>
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
     </Routes>
   );
 }
