@@ -57,7 +57,7 @@ export async function fetchDecks(): Promise<Deck[]> {
 }
 
 export async function fetchCards(deckId: string): Promise<Card[]> {
-  const response = await fetch(`${apiUrl}/card/${deckId}`, {
+  const response = await fetch(`${apiUrl}/deck/${deckId}/card`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
