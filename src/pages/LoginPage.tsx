@@ -1,47 +1,51 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../services/api";
 
 function LoginPage() {
   const [formData, setFormData] = useState({ username: "", password: "" });
   const [submit, setSubmit] = useState(0);
   const [loginError, setLoginError] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmit(submit + 1);
+    setSubmit((prev) => prev + 1);
   };
 
   useEffect(() => {
     const fetchData = async () => {
+      setLoading(true);
       try {
         const response = await loginUser(formData.username, formData.password);
         localStorage.setItem("token", response.token);
 
         const protectedRes = await fetch("http://localhost:8000/protected", {
           headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            Authorization: `Bearer ${response.token}`,
           },
         });
 
         if (!protectedRes.ok) {
           setLoginError(true);
-          console.error("Unauthorized access to protected route");
+          setLoading(false);
           return;
         }
 
-        const message = await protectedRes.text();
-        console.log("Protected route says:", message);
+        navigate("/");
       } catch (error) {
         setLoginError(true);
         console.error("Login or protected fetch failed:", error);
+      } finally {
+        setLoading(false);
       }
     };
 
     if (submit) {
       fetchData();
     }
-  }, [submit]);
+  }, [submit, navigate]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-800">
@@ -89,11 +93,39 @@ function LoginPage() {
 
         <button
           type="submit"
-          className="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition-colors"
+          disabled={loading}
+          className={`w-full flex justify-center items-center gap-2 py-2 rounded-lg transition-colors ${
+            loading
+              ? "bg-indigo-400 cursor-not-allowed"
+              : "bg-indigo-600 hover:bg-indigo-700 text-white"
+          }`}
           onClick={handleSubmit}
         >
-          Login
+          {loading && (
+            <svg
+              className="animate-spin h-5 w-5 text-white"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                className="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                strokeWidth="4"
+              ></circle>
+              <path
+                className="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              ></path>
+            </svg>
+          )}
+          {loading ? "Logging in..." : "Login"}
         </button>
+
         <Link to="/register" className="text-gray-300 hover:underline">
           Don't have an account? Register
         </Link>

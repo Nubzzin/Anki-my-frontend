@@ -42,51 +42,31 @@ export async function registerUser(
 }
 
 export async function fetchDecks(): Promise<Deck[]> {
-  const response = await fetch(`${apiUrl}/deck`);
-  console.log(response);
+  const response = await fetch(`${apiUrl}/deck`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
   if (!response.ok) {
     throw new Error("Failed to fetch decks");
   }
+
   const data = await response.json();
-  return data.map(
-    (deck: any) =>
-      new Deck(
-        deck.id,
-        deck.name,
-        deck.description,
-        deck.cards.map((card: any) => new Card(card.id, card.front, card.back)),
-      ),
-  );
+  return data.map((deck: any) => new Deck(deck.id, deck.name));
 }
 
-export async function updateDecks(decks: Deck[]) {
-  const response = await fetch(`${apiUrl}/deck`, {
-    method: "PUT",
+export async function fetchCards(deckId: string): Promise<Card[]> {
+  const response = await fetch(`${apiUrl}/card/${deckId}`, {
     headers: {
-      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
-    body: JSON.stringify(decks),
   });
 
   if (!response.ok) {
-    throw new Error("Failed to update decks");
+    throw new Error("Failed to fetch cards");
   }
 
-  return await response.json();
-}
-
-export async function addDeck(deck: Deck) {
-  const response = await fetch(`${apiUrl}/deck`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(deck),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to add deck");
-  }
-
-  return await response.json();
+  const data = await response.json();
+  return data.map((card: any) => new Card(card.id, card.front, card.back));
 }

@@ -1,15 +1,19 @@
 import { Link, useLocation } from "react-router-dom";
-import { useState } from "react";
-import type { Deck } from "../utils/models";
+import { useEffect, useState } from "react";
+import { Card, Deck } from "../utils/models";
+import { fetchCards } from "../services/api";
 
 function DeckStudyPage() {
   const { state } = useLocation();
   const deck: Deck = state?.deck;
 
-  const cards = deck.cards;
   const [current, setCurrent] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [completed, setCompleted] = useState(false);
+  const [cards, setCards] = useState<Card[]>([]);
+  const [currentCard, setCurrentCard] = useState<Card | null>(null);
+  const [progress, setProgress] = useState(0);
+  const [loading, setLoading] = useState(true);
 
   if (!deck) {
     return <div className="text-center p-10 text-white">Deck not found</div>;
@@ -17,13 +21,59 @@ function DeckStudyPage() {
 
   const handleAnswer = (quality: string) => {
     console.log(`User selected: ${quality}`);
+    setProgress(((current + 1) / cards.length) * 100);
     setFlipped(false);
+
     if (current === cards.length - 1) {
       setCompleted(true);
     } else {
-      setCurrent((prev) => prev + 1);
+      const nextIndex = current + 1;
+      setCurrent(nextIndex);
+      setCurrentCard(cards[nextIndex]);
     }
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      const fetchedCards = await fetchCards(deck.id);
+      setCards(fetchedCards);
+      setCurrentCard(fetchedCards[0]);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [deck.id]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-900 text-white">
+        <div className="text-center">
+          <svg
+            className="animate-spin h-12 w-12 text-indigo-500 mx-auto mb-4"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8v8H4z"
+            ></path>
+          </svg>
+          <p>Loading cards...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (completed) {
     return (
@@ -41,9 +91,6 @@ function DeckStudyPage() {
       </div>
     );
   }
-
-  const progress = ((current + 1) / cards.length) * 100;
-  const currentCard = cards[current];
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-gray-900 text-white">
@@ -66,7 +113,7 @@ function DeckStudyPage() {
         className="w-full max-w-3xl bg-gray-800 rounded-xl shadow p-8 mb-10 text-center text-xl font-medium cursor-pointer transition duration-300 hover:brightness-110"
         onClick={() => setFlipped(true)}
       >
-        <p>{flipped ? currentCard.front : currentCard.back}</p>
+        <p>{flipped ? currentCard?.back : currentCard?.front}</p>
         <p className="text-sm text-gray-400 mt-2">
           {!flipped && " (click to flip)"}
         </p>

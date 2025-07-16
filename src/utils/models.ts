@@ -1,14 +1,10 @@
 export class Deck {
   id: string;
   name: string;
-  description: string;
-  cards: Card[];
 
-  constructor(id: string, name: string, description: string, cards: Card[]) {
+  constructor(id: string, name: string) {
     this.id = id;
     this.name = name;
-    this.description = description;
-    this.cards = cards;
   }
 }
 

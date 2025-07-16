@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { registerUser } from "../services/api";
 
 function RegisterPage() {
@@ -10,6 +10,7 @@ function RegisterPage() {
   });
   const [submit, setSubmit] = useState(0);
   const [usernameError, setUsernameError] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,8 +43,7 @@ function RegisterPage() {
           return;
         }
 
-        const message = await protectedRes.text();
-        console.log("Protected route says:", message);
+        navigate("/");
       } catch (error) {
         setUsernameError(true);
         console.error("Login or protected fetch failed:", error);
