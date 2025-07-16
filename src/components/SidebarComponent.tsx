@@ -3,87 +3,94 @@ import { useState } from "react";
 
 function SidebarComponent() {
   const [current, setCurrent] = useState(1);
+
   return (
-    <>
-      <div className="hidden md:flex flex-col w-64 bg-gray-800">
-        <div className="flex items-center justify-center h-16 bg-gray-900">
-          <span className="text-white font-bold uppercase">Anki-my</span>
-        </div>
-        <div className="flex flex-col flex-1 overflow-y-auto">
-          <nav className="flex-1 px-2 py-4 bg-gray-800">
-            <Link
-              to="/"
-              className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 active:bg-gray-600 ${
-                current === 1 ? "bg-gray-700" : ""
-              }`}
-              onClick={() => setCurrent(1)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              Dashboard
-            </Link>
-            <Link
-              to="/deck/new"
-              className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 active:bg-gray-600 ${
-                current === 2 ? "bg-gray-700" : ""
-              }`}
-              onClick={() => setCurrent(2)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-              New Deck
-            </Link>
-            <Link
-              to="/deck/shared"
-              className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 active:bg-gray-600 ${
-                current === 3 ? "bg-gray-700" : ""
-              }`}
-              onClick={() => setCurrent(3)}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-              Shared Decks
-            </Link>
-          </nav>
-        </div>
+    <div className="hidden md:flex flex-col w-64 bg-gray-800">
+      <div className="flex items-center justify-center h-16 bg-gray-900">
+        <span className="text-white font-bold uppercase">Anki-my</span>
       </div>
-    </>
+
+      <div className="flex flex-col flex-1 overflow-y-auto">
+        <nav className="flex-1 px-2 py-4 bg-gray-800">
+          <Link
+            to="/"
+            className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ${
+              current === 1 ? "bg-gray-700" : ""
+            }`}
+            onClick={() => setCurrent(1)}
+          >
+            <svg
+              className="h-6 w-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+            Dashboard
+          </Link>
+
+          <Link
+            to="/deck/new"
+            className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ${
+              current === 2 ? "bg-gray-700" : ""
+            }`}
+            onClick={() => setCurrent(2)}
+          >
+            <svg
+              className="h-6 w-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            New Deck
+          </Link>
+
+          <Link
+            to="/deck/shared"
+            className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ${
+              current === 3 ? "bg-gray-700" : ""
+            }`}
+            onClick={() => setCurrent(3)}
+          >
+            <svg
+              className="h-6 w-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+            Shared Decks
+          </Link>
+
+          <Link
+            to="/login"
+            className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ${
+              current === 4 ? "bg-gray-700" : ""
+            }`}
+            onClick={() => setCurrent(4)}
+          >
+            <svg
+              className="h-6 w-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M15 12H3m0 0l4-4m-4 4l4 4m13-7v10a2 2 0 01-2 2H9a2 2 0 01-2-2V5a2 2 0 012-2h7"
+              />
+            </svg>
+            Logout
+          </Link>
+        </nav>
+      </div>
+    </div>
   );
 }
 

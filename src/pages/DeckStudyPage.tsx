@@ -12,11 +12,26 @@ function DeckStudyPage() {
   const [completed, setCompleted] = useState(false);
   const [cards, setCards] = useState<Card[]>([]);
   const [currentCard, setCurrentCard] = useState<Card | null>(null);
-  const [progress, setProgress] = useState(0);
+  const [progress, setProgress] = useState(1);
   const [loading, setLoading] = useState(true);
 
   if (!deck) {
-    return <div className="text-center p-10 text-white">Deck not found</div>;
+    return (
+      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white px-6">
+        <div className="bg-gray-800 rounded-lg shadow-lg p-10 max-w-md text-center">
+          <h1 className="text-4xl font-bold mb-4">Oops!</h1>
+          <p className="mb-6 text-gray-300">
+            We couldn’t find the deck you’re looking for.
+          </p>
+          <Link
+            to="/"
+            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition"
+          >
+            Go to Dashboard
+          </Link>
+        </div>
+      </div>
+    );
   }
 
   const handleAnswer = (quality: string) => {
