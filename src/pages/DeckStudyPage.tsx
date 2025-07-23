@@ -52,6 +52,11 @@ function DeckStudyPage() {
     const fetchData = async () => {
       setLoading(true);
       const fetchedCards = await fetchCards(deck.id);
+      if (fetchedCards.length === 0) {
+        setLoading(false);
+        setCompleted(true);
+        return;
+      }
       setCards(fetchedCards);
       setCurrentCard(fetchedCards[0]);
       setLoading(false);

@@ -56,6 +56,21 @@ export async function fetchDecks(): Promise<Deck[]> {
   return data.map((deck: any) => new Deck(deck.id, deck.name));
 }
 
+export async function fetchSharedDecks(): Promise<Deck[]> {
+  const response = await fetch(`${apiUrl}/deck/shared`, {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+  });
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch shared decks");
+  }
+
+  const data = await response.json();
+  return data.map((deck: any) => new Deck(deck.id, deck.name));
+}
+
 export async function fetchCards(deckId: string): Promise<Card[]> {
   const response = await fetch(`${apiUrl}/deck/${deckId}/card`, {
     headers: {
@@ -69,4 +84,24 @@ export async function fetchCards(deckId: string): Promise<Card[]> {
 
   const data = await response.json();
   return data.map((card: any) => new Card(card.id, card.front, card.back));
+}
+
+export async function newDeck(deckName: string) {
+  const response = await fetch(`${apiUrl}/deck/new`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+    body: JSON.stringify({ name: deckName }),
+  });
+
+  if (response.status === 409) {
+    throw new Error("Deck already exists");
+  }
+
+  if (!response.ok) {
+    throw new Error("Failed to create deck");
+  }
+
+  return await response.json();
 }

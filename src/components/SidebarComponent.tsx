@@ -2,8 +2,6 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function SidebarComponent() {
-  const [current, setCurrent] = useState(1);
-
   return (
     <div className="hidden md:flex flex-col w-64 bg-gray-800">
       <div className="flex items-center justify-center h-16 bg-gray-900">
@@ -14,10 +12,7 @@ function SidebarComponent() {
         <nav className="flex-1 px-2 py-4 bg-gray-800">
           <Link
             to="/"
-            className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ${
-              current === 1 ? "bg-gray-700" : ""
-            }`}
-            onClick={() => setCurrent(1)}
+            className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
           >
             <svg
               className="h-6 w-6 mr-2"
@@ -31,29 +26,8 @@ function SidebarComponent() {
           </Link>
 
           <Link
-            to="/deck/new"
-            className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ${
-              current === 2 ? "bg-gray-700" : ""
-            }`}
-            onClick={() => setCurrent(2)}
-          >
-            <svg
-              className="h-6 w-6 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
-            New Deck
-          </Link>
-
-          <Link
             to="/deck/shared"
-            className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ${
-              current === 3 ? "bg-gray-700" : ""
-            }`}
-            onClick={() => setCurrent(3)}
+            className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
           >
             <svg
               className="h-6 w-6 mr-2"
@@ -67,11 +41,23 @@ function SidebarComponent() {
           </Link>
 
           <Link
+            to="/deck/new"
+            className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
+          >
+            <svg
+              className="h-6 w-6 mr-2"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            New Deck
+          </Link>
+
+          <Link
             to="/login"
-            className={`flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700 ${
-              current === 4 ? "bg-gray-700" : ""
-            }`}
-            onClick={() => setCurrent(4)}
+            className="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
           >
             <svg
               className="h-6 w-6 mr-2"
