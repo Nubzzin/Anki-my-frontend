@@ -1,7 +1,7 @@
 // import { v4 as uuidv4 } from "uuid";
 import { Deck, Card } from "../utils/models";
 
-let apiUrl = "http://localhost:8000";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export async function loginUser(
   username: string,
