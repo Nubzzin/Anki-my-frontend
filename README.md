@@ -65,4 +65,4 @@ cargo build
 cargo run
 ```
 
-[Link to frontend](https://github.com/Nubzzin/Anki-my-frontend)
+[Link to backend](https://github.com/Nubzzin/Anki-my-backend)
