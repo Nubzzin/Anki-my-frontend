@@ -4,7 +4,34 @@ A simple, modern, full-stack flashcard app inspired by Anki, built with **React*
 
 Host your own spaced repetition learning platform — no ads, no tracking, just study.
 
-## ✨ Features
+## Screenshots
+
+### Login Page
+
+![Login Screenshot](./public/screenshots/login.png)
+
+### Home Page
+
+![Home Screenshot](./public/screenshots/decks.png)
+
+### Decks View
+
+![Decks Screenshot](./public/screenshots/decks.png)
+
+### Shared Decks
+
+![Shared Decks Screenshot](./public/screenshots/shared.png)
+
+### Add Deck
+
+![Add Deck Screenshot](./public/screenshots/new.png)
+
+### Cards Page
+
+![Cards Screenshot](./public/screenshots/cards.png)
+![Cardsback Screenshot](./public/screenshots/cardsback.png)
+
+## Features
 
 - 🔐 User authentication (JWT-based)
 - 📚 Create, manage and review decks
@@ -12,7 +39,7 @@ Host your own spaced repetition learning platform — no ads, no tracking, just 
 - 🔍 Filter decks by name
 - ☁️ Hosted frontend and backend (Railway)
 
-## 🧱 Tech Stack
+## Tech Stack
 
 ### Frontend
 
@@ -65,4 +92,4 @@ cargo build
 cargo run
 ```
 
-[Link to backend](https://github.com/Nubzzin/Anki-my-backend)
+[Link to frontend](https://github.com/Nubzzin/Anki-my-frontend)
